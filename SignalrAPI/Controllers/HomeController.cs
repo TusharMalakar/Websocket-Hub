@@ -1,18 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace SignalrAPI.Controllers
 {
     [ApiController]
     [Route("")]
-    public class HomeController : Controller
+    public class HomeController : ControllerBase
     {
-        public string Index()
+        
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger)
         {
-            return "SIGNAL-R API IS UP...";
+            _logger = logger;
+        }
+
+        [HttpGet]
+        public string Get()
+        {
+            return "Zola SignalR Is Running....";
         }
     }
 }

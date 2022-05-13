@@ -1,0 +1,7 @@
+D:\Test\ZolaAPI\SignalrAPI2\obj\Release\netcoreapp3.1\PubTmp\Out\SignalrAPI.exe
+D:\Test\ZolaAPI\SignalrAPI2\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.Development.json
+D:\Test\ZolaAPI\SignalrAPI2\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.json
+D:\Test\ZolaAPI\SignalrAPI2\obj\Release\netcoreapp3.1\PubTmp\Out\SignalrAPI.dll
+D:\Test\ZolaAPI\SignalrAPI2\obj\Release\netcoreapp3.1\PubTmp\Out\SignalrAPI.deps.json
+D:\Test\ZolaAPI\SignalrAPI2\obj\Release\netcoreapp3.1\PubTmp\Out\SignalrAPI.runtimeconfig.json
+D:\Test\ZolaAPI\SignalrAPI2\obj\Release\netcoreapp3.1\PubTmp\Out\SignalrAPI.pdb

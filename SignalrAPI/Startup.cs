@@ -1,50 +1,61 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using SignalrAPI.Hubs;
+using SignalrAPI.Models;
 
 namespace SignalrAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IConfiguration Config { get; }
+
+        public Startup(IConfiguration _Config, IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            Config = _Config;
+            var builder = new ConfigurationBuilder()
+                        .SetBasePath(env.ContentRootPath)
+                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            Config = builder.Build();
         }
 
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var appSettings = Config.GetSection("AppSettings").Get<AppSettings>();
             services.AddControllers();
+
+            // Add Cors Policy
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {
-                builder.AllowAnyHeader()
+                builder
+                .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials()
-                .SetIsOriginAllowed(_ => true);
+                //.SetIsOriginAllowed(_ => true);
+                .WithOrigins(appSettings.OmnizantDevWebHost, appSettings.OmnizantPMAWebHost);
             }));
-            services.AddSignalR();
+
+            // Add Signal-R Service and Radis For Load Balancer
+            services.AddSignalR().AddStackExchangeRedis("127.0.0.1");
+
+            // Mapping AppSettings Configuration
+            services.Configure<AppSettings>(Config.GetSection("AppSettings"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseCors("CorsPolicy");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -59,6 +70,7 @@ namespace SignalrAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<ChatHub>("/chathub");
+                endpoints.MapHub<EmailHub>("/emailhub");
             });
         }
     }

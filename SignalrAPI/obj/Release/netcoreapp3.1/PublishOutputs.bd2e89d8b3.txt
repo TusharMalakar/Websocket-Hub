@@ -1,9 +1,0 @@
-C:\Projects\Social\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\SignalrAPI.exe
-C:\Projects\Social\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.Development.json
-C:\Projects\Social\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.json
-C:\Projects\Social\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\SignalrAPI.dll
-C:\Projects\Social\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\SignalrAPI.deps.json
-C:\Projects\Social\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\SignalrAPI.runtimeconfig.json
-C:\Projects\Social\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\SignalrAPI.pdb
-C:\Projects\Social\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\Newtonsoft.Json.dll
-C:\Projects\Social\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\System.Net.WebSockets.WebSocketProtocol.dll

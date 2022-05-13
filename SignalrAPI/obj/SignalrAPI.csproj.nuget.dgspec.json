@@ -1,30 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\Social\\SignalrAPI\\SignalrAPI.csproj": {}
+    "D:\\Azure\\ZolaSuite-Web\\SignalrAPI\\SignalrAPI.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\Social\\SignalrAPI\\SignalrAPI.csproj": {
+    "D:\\Azure\\ZolaSuite-Web\\SignalrAPI\\SignalrAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\Social\\SignalrAPI\\SignalrAPI.csproj",
+        "projectUniqueName": "D:\\Azure\\ZolaSuite-Web\\SignalrAPI\\SignalrAPI.csproj",
         "projectName": "SignalrAPI",
-        "projectPath": "C:\\Projects\\Social\\SignalrAPI\\SignalrAPI.csproj",
-        "packagesPath": "C:\\Users\\Tushar\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\Social\\SignalrAPI\\obj\\",
+        "projectPath": "D:\\Azure\\ZolaSuite-Web\\SignalrAPI\\SignalrAPI.csproj",
+        "packagesPath": "C:\\Users\\tmalakr\\.nuget\\packages\\",
+        "outputPath": "D:\\Azure\\ZolaSuite-Web\\SignalrAPI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Tushar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "D:\\Azure\\ZolaSuite-Web\\.nuget\\NuGet.Config",
+          "C:\\Users\\tmalakr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,9 +40,9 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
-            "Microsoft.AspNetCore.SignalR": {
+            "Microsoft.AspNetCore.SignalR.StackExchangeRedis": {
               "target": "Package",
-              "version": "[1.1.0, )"
+              "version": "[3.1.0, )"
             }
           },
           "imports": [
@@ -66,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

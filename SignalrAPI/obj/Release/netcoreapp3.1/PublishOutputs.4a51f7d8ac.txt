@@ -1,0 +1,11 @@
+D:\Azure\ZolaSuite-Web\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\SignalrAPI.exe
+D:\Azure\ZolaSuite-Web\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.Development.json
+D:\Azure\ZolaSuite-Web\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.json
+D:\Azure\ZolaSuite-Web\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\SignalrAPI.dll
+D:\Azure\ZolaSuite-Web\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\SignalrAPI.deps.json
+D:\Azure\ZolaSuite-Web\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\SignalrAPI.runtimeconfig.json
+D:\Azure\ZolaSuite-Web\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\SignalrAPI.pdb
+D:\Azure\ZolaSuite-Web\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\MessagePack.dll
+D:\Azure\ZolaSuite-Web\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.SignalR.Redis.dll
+D:\Azure\ZolaSuite-Web\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\Newtonsoft.Json.dll
+D:\Azure\ZolaSuite-Web\SignalrAPI\obj\Release\netcoreapp3.1\PubTmp\Out\StackExchange.Redis.StrongName.dll
