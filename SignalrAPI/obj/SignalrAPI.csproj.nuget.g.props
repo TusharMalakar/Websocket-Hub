@@ -15,4 +15,8 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgAlachisoft_NCache_Professional_SDK Condition=" '$(PkgAlachisoft_NCache_Professional_SDK)' == '' ">C:\Users\tmalakr\.nuget\packages\alachisoft.ncache.professional.sdk\5.3.0</PkgAlachisoft_NCache_Professional_SDK>
+    <PkgAspNetCore_SignalR_NCache_Professional Condition=" '$(PkgAspNetCore_SignalR_NCache_Professional)' == '' ">C:\Users\tmalakr\.nuget\packages\aspnetcore.signalr.ncache.professional\5.3.0</PkgAspNetCore_SignalR_NCache_Professional>
+  </PropertyGroup>
 </Project>

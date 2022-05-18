@@ -1,20 +1,19 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Azure\\ZolaSuite-Web\\SignalrAPI\\SignalrAPI.csproj": {}
+    "D:\\Signal-R-ChatHub\\SignalrAPI\\SignalrAPI.csproj": {}
   },
   "projects": {
-    "D:\\Azure\\ZolaSuite-Web\\SignalrAPI\\SignalrAPI.csproj": {
+    "D:\\Signal-R-ChatHub\\SignalrAPI\\SignalrAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Azure\\ZolaSuite-Web\\SignalrAPI\\SignalrAPI.csproj",
+        "projectUniqueName": "D:\\Signal-R-ChatHub\\SignalrAPI\\SignalrAPI.csproj",
         "projectName": "SignalrAPI",
-        "projectPath": "D:\\Azure\\ZolaSuite-Web\\SignalrAPI\\SignalrAPI.csproj",
+        "projectPath": "D:\\Signal-R-ChatHub\\SignalrAPI\\SignalrAPI.csproj",
         "packagesPath": "C:\\Users\\tmalakr\\.nuget\\packages\\",
-        "outputPath": "D:\\Azure\\ZolaSuite-Web\\SignalrAPI\\obj\\",
+        "outputPath": "D:\\Signal-R-ChatHub\\SignalrAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "D:\\Azure\\ZolaSuite-Web\\.nuget\\NuGet.Config",
           "C:\\Users\\tmalakr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -40,6 +39,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "AspNetCore.SignalR.NCache.Professional": {
+              "target": "Package",
+              "version": "[5.3.0, )"
+            },
             "Microsoft.AspNetCore.SignalR.StackExchangeRedis": {
               "target": "Package",
               "version": "[3.1.0, )"

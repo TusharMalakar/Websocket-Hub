@@ -3,6 +3,7 @@ using SignalrAPI.Models;
 using SignalrAPI.Common;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using StackExchange.Redis;
 
 namespace SignalrAPI.Controllers
 {
@@ -13,9 +14,9 @@ namespace SignalrAPI.Controllers
     {
         private ChatHub chatHub;
 
-        public ChatController()
+        public ChatController(AppSettings _appSettings, IConnectionMultiplexer _redis)
         {
-            chatHub = new ChatHub();
+            chatHub = new ChatHub(_appSettings, _redis);
         }
 
         [HttpPost]

@@ -1,11 +1,12 @@
+using Alachisoft.NCache.AspNetCore.SignalR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-//using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SignalrAPI.Hubs;
 using SignalrAPI.Models;
+using StackExchange.Redis;
 
 namespace SignalrAPI
 {
@@ -27,6 +28,11 @@ namespace SignalrAPI
         public void ConfigureServices(IServiceCollection services)
         {
             var appSettings = Config.GetSection("AppSettings").Get<AppSettings>();
+            
+            // Configure AppSettings 
+            services.Configure<AppSettings>(Config.GetSection("AppSettings"));
+            
+
             services.AddControllers();
 
             // Add Cors Policy
@@ -40,11 +46,24 @@ namespace SignalrAPI
                 .WithOrigins(appSettings.OmnizantDevWebHost, appSettings.OmnizantPMAWebHost);
             }));
 
-            // Add Signal-R Service and Radis For Load Balancer
-            services.AddSignalR().AddStackExchangeRedis("127.0.0.1");
+            if (appSettings.IsRedisEnabled)
+            {
+                // Add Signal-R and Redis Backplane for Signalr Scaling
+                services.AddSignalR();
+                services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(appSettings.RedisConnectionString));
+            }
 
-            // Mapping AppSettings Configuration
-            services.Configure<AppSettings>(Config.GetSection("AppSettings"));
+            if (appSettings.IsNCacheEnabled)
+            {
+                // Add Signal-R Service and NCache Backplane For Signalr Scaling
+                services.AddSignalR().AddNCache(ncacheOptions =>
+                {
+                    ncacheOptions.CacheName = appSettings.NCacheName;
+                    ncacheOptions.ApplicationID = appSettings.NCacheApplicationId;
+                    ncacheOptions.UserId = appSettings.NCacheUserId;
+                    ncacheOptions.Password = appSettings.NCachePassword;
+                });
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
