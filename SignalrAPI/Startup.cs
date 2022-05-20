@@ -42,17 +42,31 @@ namespace SignalrAPI
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials()
-                //.SetIsOriginAllowed(_ => true);
-                .WithOrigins(appSettings.OmnizantDevWebHost, appSettings.OmnizantPMAWebHost);
+                .SetIsOriginAllowed(_ => true);
+                //.WithOrigins(appSettings.OmnizantDevWebHost, appSettings.OmnizantPMAWebHost);
             }));
 
+            // When Redis-Backplan is Enabled
             if (appSettings.IsRedisEnabled)
             {
                 // Add Signal-R and Redis Backplane for Signalr Scaling
                 services.AddSignalR();
-                services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(appSettings.RedisConnectionString));
+                ConfigurationOptions redisConnectionConfig = new ConfigurationOptions()
+                {
+                    ClientName = "SignalrAPI",
+                    SyncTimeout = 50000,
+                    EndPoints =
+                    {
+                        {appSettings.RedisConnectionString}
+                    },
+                    AbortOnConnectFail = false // this prevents that error
+                };
+                var connection = ConnectionMultiplexer.Connect(redisConnectionConfig);
+                //var connection = ConnectionMultiplexer.Connect(appSettings.RedisConnectionString);
+                services.AddSingleton<IConnectionMultiplexer>(connection);
             }
 
+            // When NCache-Backplan is Enabled
             if (appSettings.IsNCacheEnabled)
             {
                 // Add Signal-R Service and NCache Backplane For Signalr Scaling
@@ -63,6 +77,12 @@ namespace SignalrAPI
                     ncacheOptions.UserId = appSettings.NCacheUserId;
                     ncacheOptions.Password = appSettings.NCachePassword;
                 });
+            }
+
+            // When Both Redis and NCache Backplans are not Enabled
+            if (!appSettings.IsRedisEnabled && !appSettings.IsNCacheEnabled)
+            {
+                services.AddSignalR();
             }
         }
 

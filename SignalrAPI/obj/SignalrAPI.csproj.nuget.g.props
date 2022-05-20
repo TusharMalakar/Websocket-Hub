@@ -5,18 +5,23 @@
     <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
     <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
     <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
-    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\tmalakr\.nuget\packages\</NuGetPackageFolders>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\Tushar\.nuget\packages\;C:\Program Files\dotnet\sdk\NuGetFallbackFolder</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
     <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.11.1</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <SourceRoot Include="C:\Users\tmalakr\.nuget\packages\" />
+    <SourceRoot Include="C:\Users\Tushar\.nuget\packages\" />
+    <SourceRoot Include="C:\Program Files\dotnet\sdk\NuGetFallbackFolder\" />
   </ItemGroup>
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)microsoft.visualstudio.azure.containers.tools.targets\1.11.1\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props" Condition="Exists('$(NuGetPackageRoot)microsoft.visualstudio.azure.containers.tools.targets\1.11.1\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" />
+  </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgAlachisoft_NCache_Professional_SDK Condition=" '$(PkgAlachisoft_NCache_Professional_SDK)' == '' ">C:\Users\tmalakr\.nuget\packages\alachisoft.ncache.professional.sdk\5.3.0</PkgAlachisoft_NCache_Professional_SDK>
-    <PkgAspNetCore_SignalR_NCache_Professional Condition=" '$(PkgAspNetCore_SignalR_NCache_Professional)' == '' ">C:\Users\tmalakr\.nuget\packages\aspnetcore.signalr.ncache.professional\5.3.0</PkgAspNetCore_SignalR_NCache_Professional>
+    <PkgMicrosoft_VisualStudio_Azure_Containers_Tools_Targets Condition=" '$(PkgMicrosoft_VisualStudio_Azure_Containers_Tools_Targets)' == '' ">C:\Users\Tushar\.nuget\packages\microsoft.visualstudio.azure.containers.tools.targets\1.11.1</PkgMicrosoft_VisualStudio_Azure_Containers_Tools_Targets>
+    <PkgAlachisoft_NCache_Professional_SDK Condition=" '$(PkgAlachisoft_NCache_Professional_SDK)' == '' ">C:\Users\Tushar\.nuget\packages\alachisoft.ncache.professional.sdk\5.3.0</PkgAlachisoft_NCache_Professional_SDK>
+    <PkgAspNetCore_SignalR_NCache_Professional Condition=" '$(PkgAspNetCore_SignalR_NCache_Professional)' == '' ">C:\Users\Tushar\.nuget\packages\aspnetcore.signalr.ncache.professional\5.3.0</PkgAspNetCore_SignalR_NCache_Professional>
   </PropertyGroup>
 </Project>
