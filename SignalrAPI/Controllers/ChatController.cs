@@ -4,19 +4,20 @@ using SignalrAPI.Common;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StackExchange.Redis;
+using Microsoft.AspNetCore.SignalR;
+using SignalrAPI.IServices;
 
 namespace SignalrAPI.Controllers
 {
-    [Authenticate]
+    //[Authenticate]
     [ApiController]
     [Route("chat/")]
     public class ChatController : Controller
     {
         private ChatHub chatHub;
-
-        public ChatController(AppSettings _appSettings, IConnectionMultiplexer _redis)
+        public ChatController(IHubContext<ChatHub, IHubChatClient> _chatHub, AppSettings _appSettings, IConnectionMultiplexer redisConnection=null)
         {
-            chatHub = new ChatHub(_appSettings, _redis);
+            chatHub = new ChatHub(_chatHub, _appSettings, redisConnection);
         }
 
         [HttpPost]

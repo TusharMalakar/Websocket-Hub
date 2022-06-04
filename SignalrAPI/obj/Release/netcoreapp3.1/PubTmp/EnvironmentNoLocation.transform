@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+        <system.webServer>
+          <aspNetCore>
+                <environmentVariables xdt:Transform="InsertIfMissing"><environmentVariable name="ASPNETCORE_HOSTINGSTARTUPASSEMBLIES" value="Microsoft.Azure.SignalR" xdt:Locator="Match(name)" xdt:Transform="InsertIfMissing" /></environmentVariables></aspNetCore></system.webServer></configuration>

@@ -1,4 +1,3 @@
-using Alachisoft.NCache.AspNetCore.SignalR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -42,48 +41,22 @@ namespace SignalrAPI
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials()
-                .SetIsOriginAllowed(_ => true);
-                //.WithOrigins(appSettings.OmnizantDevWebHost, appSettings.OmnizantPMAWebHost);
+                //.SetIsOriginAllowed(_ => true); // allow all origin
+                .WithOrigins(appSettings.OmnizantDevWebHost, appSettings.OmnizantTusharWebHost, appSettings.OmnizantOmerWebHost, appSettings.OmnizantPMAWebHost);
             }));
 
-            // When Redis-Backplan is Enabled
+            // Add Signal-R and Redis Backplane for Signalr Scaling
             if (appSettings.IsRedisEnabled)
             {
-                // Add Signal-R and Redis Backplane for Signalr Scaling
                 services.AddSignalR();
-                ConfigurationOptions redisConnectionConfig = new ConfigurationOptions()
-                {
-                    ClientName = "SignalrAPI",
-                    SyncTimeout = 50000,
-                    EndPoints =
-                    {
-                        {appSettings.RedisConnectionString}
-                    },
-                    AbortOnConnectFail = false // this prevents that error
-                };
-                var connection = ConnectionMultiplexer.Connect(redisConnectionConfig);
-                //var connection = ConnectionMultiplexer.Connect(appSettings.RedisConnectionString);
-                services.AddSingleton<IConnectionMultiplexer>(connection);
+                var redisConn = ConnectionMultiplexer.Connect(appSettings.RedisConnectionString);
+                services.AddSingleton<IConnectionMultiplexer>(redisConn);  
             }
-
-            // When NCache-Backplan is Enabled
-            if (appSettings.IsNCacheEnabled)
-            {
-                // Add Signal-R Service and NCache Backplane For Signalr Scaling
-                services.AddSignalR().AddNCache(ncacheOptions =>
-                {
-                    ncacheOptions.CacheName = appSettings.NCacheName;
-                    ncacheOptions.ApplicationID = appSettings.NCacheApplicationId;
-                    ncacheOptions.UserId = appSettings.NCacheUserId;
-                    ncacheOptions.Password = appSettings.NCachePassword;
-                });
-            }
-
-            // When Both Redis and NCache Backplans are not Enabled
-            if (!appSettings.IsRedisEnabled && !appSettings.IsNCacheEnabled)
+            else
             {
                 services.AddSignalR();
             }
+            services.AddSingleton(appSettings);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

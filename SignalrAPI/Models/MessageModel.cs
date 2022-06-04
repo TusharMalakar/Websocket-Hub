@@ -12,6 +12,6 @@ namespace SignalrAPI.Models
         public List<int> UserIds { get; set; } // supply when need send messae to list of User
         public int MessageStatusId { get; set; }// Delivered, Un-read, read
 
-        public object Data { get; set; }
+        public string Data { get; set; }
     }
 }

@@ -5,6 +5,6 @@ namespace SignalrAPI.IServices
 {
     public interface IHubChatClient
     {
-        Task BroadcastMessage(MessageModel payload);
+        Task BroadcastMessage(string payload);
     }
 }

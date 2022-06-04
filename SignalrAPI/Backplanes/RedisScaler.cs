@@ -1,36 +1,38 @@
-﻿using Alachisoft.NCache.Runtime.Caching;
+﻿using System;
+using Newtonsoft.Json;
 using SignalrAPI.Models;
 using StackExchange.Redis;
-using System;
-using Newtonsoft.Json;
+using SignalrAPI.IBackplans;
 using System.Threading.Tasks;
 
 namespace SignalrAPI.Backplanes
 {
-    public class RedisScaler //: IScalerService
+    public class RedisScaler : IRedisBackplan
     {
+        private string TopicName = string.Empty; // Channel
         private IConnectionMultiplexer redis = null;
-        public RedisScaler(IConnectionMultiplexer _redis, Func<MessageModel, object> clientCallback)
+        public RedisScaler(IConnectionMultiplexer _redis, Func<MessageModel, object> clientCallback, string topicName)
         {
             redis = _redis;
-            SubscribeToRedisMessageTopicAsync(clientCallback);
+            TopicName = topicName;
+            SubscribeToTopicAsync(clientCallback);
         }
 
-        public void SubscribeToRedisMessageTopicAsync(Func<MessageModel, object> clientCallback)
+        public void SubscribeToTopicAsync(Func<MessageModel, object> clientCallback)
         {
-            redis.GetSubscriber().SubscribeAsync("chatTopic", async (channel, value) =>
+            redis.GetSubscriber().SubscribeAsync(TopicName, async (channel, value) =>
             {
                 clientCallback(JsonConvert.DeserializeObject<MessageModel>(value));
             });
         }
 
-        public async Task PublishToMessageTopic(MessageModel message)
+        public async Task PublishToTopic(MessageModel message)
         {
-            await redis.GetSubscriber().PublishAsync("chatTopic", JsonConvert.SerializeObject(message));
+            await redis.GetSubscriber().PublishAsync(TopicName, JsonConvert.SerializeObject(message));
         }
 
 
-        public async Task UnsubscribeToMessageTopic()
+        public async Task UnsubscribeFromTopic()
         {
             await redis.GetSubscriber().UnsubscribeAllAsync();
         }   
