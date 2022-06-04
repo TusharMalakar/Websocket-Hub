@@ -12,6 +12,6 @@
 - This service can be used to send nofication, message and email to its client.  
 - The SignalR Servers and Clients are using TCP/IP connection to communicate.
 - This SignalR API is designed to handle any number of client connection by adding more nodes.
-- When, we have many nodes one node wont be able to communicate with another without a "Backplane"
-- I am using "Redis-Backplane" to resolve communication amoung nodes.
+- When, we have many nodes one node wont be able to communicate with another node without a "Backplane"
+- I am using "Redis-Backplane" to resolve communication among nodes.
 - If one node want to send message to all nodes, we can achive using this design.
