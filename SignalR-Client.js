@@ -16,10 +16,10 @@ const connection = new signalR.HubConnectionBuilder()
 start();
 
 // function to connect
-async function start(){
+function start(){
     // Register UserId on Connect
-    await connection.start().then(function () {
-        console.log('SignalR Connected!');
+    connection.start().then(function () {
+        console.clear();
         connection.invoke('RegisterConId', GetUserId())      
     }).catch(function (err) {
         console.error(err.toString());
@@ -30,13 +30,27 @@ async function start(){
 connection.on("BroadcastMessage", (message) =>
 {
     // update message delivery status to HUb
-    message.messageStatusId = MessageDelivered;
-    connection.invoke('UpdateMessageStatus',message);
+    var messageModel = JSON.parse(message);
+    messageModel.messageStatusId = MessageDelivered;
+    if(messageModel && messageModel.Data){
+        
+        if(!MsgIds.includes(messageModel.MessageSid)){
+            MsgIds.push(messageModel.MessageSid);
+            const msgBody = JSON.parse(messageModel.Data);
+            PopupNotification(msgBody.Body, "success");
+            
+            //emit 'ChatContext' event for UI
+            var evt = document.createEvent('CustomEvent');
+            evt.initCustomEvent('ChatContext', false, false, messageModel);
+            window.dispatchEvent(evt);
+
+            setTimeout(function(){
+                MsgIds = MsgIds.filter(msgId => msgId != messageModel.MessageSid);
+            }, 1000);
+        } 
+    }
     
-    //emit 'ChatContext' event for UI
-    var evt = document.createEvent('CustomEvent');
-    evt.initCustomEvent('ChatContext', false, false, message);
-    window.dispatchEvent(evt);
+    connection.invoke('UpdateMessageStatus',messageModel);
 });
 
 // Subscribe to 'MessageStatus' event which will be emit from UI
@@ -45,14 +59,15 @@ window.addEventListener("MessageStatus", function(evt) {
 }, false);
 
 // function to reconnect 
-connection.onclose(async () => {
+connection.onclose(() => {
     // re-start the connection
-    await start();
+    start();
 });
 
 // ChatHub URL
 function hubUrl(){
-    return "https://signalrapi.omnizant.com/chathub";
+    // return "https://localhost:44320/chathub";
+    return "https://zolahub.azurewebsites.net/chathub";
 }
 
 // Get UserId from browser cookie
@@ -61,5 +76,5 @@ function GetUserId(){
     return UserId ? parseInt(UserId[1]) : 0;
 }
 
-
+MsgIds = [];
 
