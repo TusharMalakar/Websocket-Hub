@@ -1,4 +1,4 @@
-# Signal-R-ChatHub with Redis-Backplane
+# Signal-R-Hub with Redis-Backplane
 
 - A multi-node Realtime Hi-Scaled Chat-Hub: Desiged with
   1. ASP.NET Core 3.1
