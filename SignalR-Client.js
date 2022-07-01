@@ -67,7 +67,7 @@ connection.onclose(() => {
 // ChatHub URL
 function hubUrl(){
     // return "https://localhost:44320/chathub";
-    return "https://zolahub.azurewebsites.net/chathub";
+    return "https://*.azurewebsites.net/chathub";
 }
 
 // Get UserId from browser cookie
