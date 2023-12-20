@@ -42,7 +42,7 @@ namespace SignalrAPI
                 .AllowAnyMethod()
                 .AllowCredentials()
                 //.SetIsOriginAllowed(_ => true); // allow all origin
-                .WithOrigins(appSettings.OmnizantDevWebHost, appSettings.OmnizantTusharWebHost, appSettings.OmnizantOmerWebHost, appSettings.OmnizantPMAWebHost);
+                .WithOrigins(appSettings.DevWebHost, appSettings.OmnizantTusharWebHost, appSettings.OmnizantOmerWebHost, appSettings.OmnizantPMAWebHost);
             }));
 
             // Add Signal-R and Redis Backplane for Signalr Scaling
